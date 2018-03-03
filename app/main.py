@@ -21,17 +21,12 @@ def start():
     board_width = data.get('width')
     board_height = data.get('height')
 
-    head_url = '%s://%s/static/head.png' % (
-        bottle.request.urlparts.scheme,
-        bottle.request.urlparts.netloc
-    )
-
     # TODO: Do things with data
 
     return {
         'color': '#00FF00',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
-        'head_url': head_url
+        'head_url': 'fang'
     }
 
 
@@ -40,7 +35,7 @@ def move():
     data = bottle.request.json
 
     # TODO: Do things with data
-    
+
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
     print direction
