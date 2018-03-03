@@ -44,7 +44,9 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    board = [[0 for x in range(data.get('width'))] for y in range(data.get('height'))]
+    board_width = data.get('width')
+    board_height = data.get('height')
+    board = [[0 for x in range(board_width)] for y in range(board_height)]
     for a in data.get('food').get('data'):
         x = a.get('x')
         y = a.get('y')
@@ -52,23 +54,54 @@ def move():
 
     for snake in data.get('snakes').get('data'):
         if snake.get('name') == 'spicerack-snake':
+            iteration = 1
             for point in snake.get('body').get('data'):
-                snakeX = point.get('x')
-                snakeY = point.get('y')
-                board[snakeX][snakeY] = 'L'
+                if iteration == 1:
+                    headX = point.get('x')
+                    headY = point.get('y')
+                    board[headX][headY] = 'H'
+                else:
+                    ourSnakeX = point.get('x')
+                    ourSnakeY = point.get('y')
+                    board[ourSnakeX][ourSnakeY] = 'X'
+                iteration = iteration+1
         else:
             for point in snake.get('body').get('data'):
                 snakeX = point.get('x')
                 snakeY = point.get('y')
                 board[snakeX][snakeY] = 'X'
     # TODO: Do things with data
-    #print(board)
+    #compute spaces down
+    spacesDown = 0
+    spacesUp = 0
+    spacesLeft = 0
+    spacesRight = 0
+    for down in range(headY+1, board_height):
+        if board[headX][down] == 0:
+            spacesDown = spacesDown+1
+        else:
+            break
+    for right in range(headX+1, board_width):
+        if board[right][headY] == 0:
+            spacesRight = spacesRight+1
+        else:
+            break
+    for up in range(headY-1, 0, -1):
+        if board[headX][up] == 0:
+            spacesUp = spacesUp+1
+        else:
+            break
+    for left in range(headX-1, 0, -1):
+        if board[left][headY] == 0:
+            spacesLeft = spacesLeft+1
+        else:
+            break
+    move = 'left'
     taunt = taunts[random.randint(0,2)]
-    directions = ['up', 'down', 'left', 'right']
-    direction = random.choice(directions)
+
     print direction
     return {
-        'move': direction,
+        'move': move,
         'taunt': taunt
     }
 
