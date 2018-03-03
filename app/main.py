@@ -3,6 +3,7 @@ import os
 import random
 
 
+taunts = ['Cumin for you', 'Catch me if you cayenne', 'Youre outta thyme']
 
 @bottle.route('/')
 def static():
@@ -16,6 +17,7 @@ def static(path):
 
 @bottle.post('/start')
 def start():
+    taunt = taunts[random.randit(0,3)]
     data = bottle.request.json
     game_id = data.get('game_id')
     board_width = data.get('width')
@@ -30,7 +32,7 @@ def start():
 
     return {
         'color': '#00FF00',
-        'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
+        'taunt': taunt,
         'head_url': head_url
     }
 
@@ -40,7 +42,7 @@ def move():
     data = bottle.request.json
 
     # TODO: Do things with data
-    
+
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
     print direction
