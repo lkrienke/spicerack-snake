@@ -17,17 +17,22 @@ def static(path):
 
 @bottle.post('/start')
 def start():
-    taunt = taunts[random.randit(0,3)]
+    taunt = taunts[random.randint(0,3)]
     data = bottle.request.json
     game_id = data.get('game_id')
     board_width = data.get('width')
     board_height = data.get('height')
 
+
+    head_url = '%s://%s/static/fang.png' % (
+        bottle.request.urlparts.scheme,
+        bottle.request.urlparts.netloc
+    )
     # TODO: Do things with data
 
     return {
         'color': '#00FF00',
-        'head_url': 'fang',
+        'head_url': head_url,
         'taunt': taunt
     }
 
