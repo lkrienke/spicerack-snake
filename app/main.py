@@ -74,7 +74,7 @@ def move():
                 board[snakeX][snakeY] = 'X'
 
     moveOptions = {'spacesDown': 0, 'spacesUp': 0, 'spacesLeft': 0, 'spacesRight':0}
-    global lastMove
+    #global lastMove
 
     for down in range(headY+1, board_height):
         if board[headX][down] == 0 or board[headX][down] == 'F':
@@ -98,7 +98,7 @@ def move():
             break
     most = max(moveOptions, key=lambda i: moveOptions[i])
 
-    move = lastMove
+    #move = lastMove
     if most == 'spacesUp':
         move = 'up'
     elif most == 'spacesDown':
@@ -109,7 +109,7 @@ def move():
         movw = 'right'
     #taunt = taunts[random.randint(0,2)]
     taunt = "Up:" +str(moveOptions['spacesUp'])+" Down: "+str(moveOptions['spacesDown'])+" Right: "+ str(moveOptions['spacesRight'])+ " Left: "+str(moveOptions['spacesLeft'])
-    lastMove = move
+    #lastMove = move
     return {
         'move': move,
         'taunt': taunt
