@@ -24,7 +24,7 @@ def start():
     board_height = data.get('height')
 
 
-    head_url = '%s://%s/static/fang.svg' % (
+    head_url = '%s://%s/static/spicerack.jpeg' % (
         bottle.request.urlparts.scheme,
         bottle.request.urlparts.netloc
     )
