@@ -73,8 +73,7 @@ def move():
 
     moveOptions = {'spacesDown': 0, 'spacesUp': 0, 'spacesLeft': 0, 'spacesRight':0}
     global lastMove
-    if lastMove == 'up':
-        #dont go down
+
     for down in range(headY+1, board_height):
         if board[headX][down] == 0 or board[headX][down] == 'F':
             moveOptions['spacesDown'] = moveOptions['spacesDown']+1
@@ -107,7 +106,7 @@ def move():
     elif most == 'spacesRight':
         movw = 'right'
     #taunt = taunts[random.randint(0,2)]
-    taunt = "Head: ", headX,", "headY
+    taunt = "Head: ", headX,", ",headY
     lastMove = move
     return {
         'move': move,
