@@ -4,8 +4,7 @@ import random
 
 
 taunts = ['Cumin for you', 'Catch me if you cayenne', 'Youre outta thyme']
-board_width = 20
-board_height = 20
+lastMove = 'up'
 
 @bottle.route('/')
 def static():
@@ -55,6 +54,7 @@ def move():
     for snake in data.get('snakes').get('data'):
         if snake.get('name') == 'spicerack-snake':
             iteration = 1
+
             for point in snake.get('body').get('data'):
                 if iteration == 1:
                     headX = point.get('x')
@@ -75,27 +75,28 @@ def move():
     moveOptions = {'spacesDown': 0, 'spacesUp': 0, 'spacesLeft': 0, 'spacesRight':0}
 
     for down in range(headY+1, board_height):
-        if board[headX][down] == 0:
+        if board[headX][down] == 0 or board[headX][down] == 'F':
             moveOptions['spacesDown'] = moveOptions['spacesDown']+1
         else:
             break
     for right in range(headX+1, board_width):
-        if board[right][headY] == 0:
+        if board[right][headY] == 0 or board[right][headY] == 'F':
             moveOptions['spacesRight'] = moveOptions['spacesRight']+1
         else:
             break
     for up in range(headY-1, 0, -1):
-        if board[headX][up] == 0:
+        if board[headX][up] == 0 or board[headX][up] == 'F':
             moveOptions['spacesUp'] = moveOptions['spacesUp']+1
         else:
             break
     for left in range(headX-1, 0, -1):
-        if board[left][headY] == 0:
+        if board[left][headY] == 0 or board[left][headY] == 'F':
             moveOptions['spacesLeft'] = moveOptions['spacesLeft']+1
         else:
             break
     most = max(moveOptions, key=lambda i: moveOptions[i])
-    move = 'up'
+    global lastMove
+    move = lastMove
     if most == 'spacesUp':
         move = 'up'
     elif most == 'spacesDown':
@@ -106,6 +107,7 @@ def move():
         movw = 'right'
     taunt = taunts[random.randint(0,2)]
 
+    lastMove = move
     return {
         'move': move,
         'taunt': taunt
