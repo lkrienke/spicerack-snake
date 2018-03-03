@@ -50,7 +50,7 @@ def move():
         x = a.get('x')
         y = a.get('y')
         board[x][y] = 'F'
-
+    taunt = ""
     for snake in data.get('snakes').get('data'):
         if snake.get('name') == 'spicerack-snake':
             iteration = 1
@@ -60,10 +60,12 @@ def move():
                     headX = point.get('x')
                     headY = point.get('y')
                     board[headX][headY] = 'H'
+                    taunt = taunt +" ("+headX","+headY+")"
                 else:
                     ourSnakeX = point.get('x')
                     ourSnakeY = point.get('y')
                     board[ourSnakeX][ourSnakeY] = 'X'
+                    taunt = taunt +" ("+ourSnakeX","+ourSnakeY+")"
                 iteration = iteration+1
         else:
             for point in snake.get('body').get('data'):
@@ -106,7 +108,6 @@ def move():
     elif most == 'spacesRight':
         movw = 'right'
     #taunt = taunts[random.randint(0,2)]
-    taunt = str(headX) + ", "+ str(headY)
     lastMove = move
     return {
         'move': move,
