@@ -31,8 +31,10 @@ def start():
     # TODO: Do things with data
 
     return {
-        'color': '#00FF00',
+        'color': '#5F4F6C',
         'head_url': head_url,
+        'head_type': 'fang',
+        'tail_type': 'curled',
         'taunt': taunt
     }
 
@@ -42,6 +44,7 @@ def move():
     data = bottle.request.json
 
     # TODO: Do things with data
+
     taunt = taunts[random.randint(0,2)]
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
