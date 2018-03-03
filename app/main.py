@@ -24,7 +24,7 @@ def start():
     board_height = data.get('height')
 
 
-    head_url = '%s://%s/static/fang.png' % (
+    head_url = '%s://%s/static/fang.svg' % (
         bottle.request.urlparts.scheme,
         bottle.request.urlparts.netloc
     )
@@ -42,13 +42,13 @@ def move():
     data = bottle.request.json
 
     # TODO: Do things with data
-
+    taunt = taunts[random.randint(0,2)]
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
     print direction
     return {
         'move': direction,
-        'taunt': 'battlesnake-python!'
+        'taunt': taunt
     }
 
 
