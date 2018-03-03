@@ -106,7 +106,7 @@ def move():
     elif most == 'spacesRight':
         movw = 'right'
     #taunt = taunts[random.randint(0,2)]
-    taunt = "Head: ", headX,", ",headY
+    taunt = str(headX) + ", "+ str(headY)
     lastMove = move
     return {
         'move': move,
