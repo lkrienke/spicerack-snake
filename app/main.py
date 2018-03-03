@@ -60,12 +60,12 @@ def move():
                     headX = point.get('x')
                     headY = point.get('y')
                     board[headX][headY] = 'H'
-                    taunt = taunt +" ("+headX","+headY+")"
+                    taunt = taunt +" ("+str(headX)+","+str(headY)+")"
                 else:
                     ourSnakeX = point.get('x')
                     ourSnakeY = point.get('y')
                     board[ourSnakeX][ourSnakeY] = 'X'
-                    taunt = taunt +" ("+ourSnakeX","+ourSnakeY+")"
+                    taunt = taunt +" ("+str(ourSnakeX)+","+str(ourSnakeY)+")"
                 iteration = iteration+1
         else:
             for point in snake.get('body').get('data'):
