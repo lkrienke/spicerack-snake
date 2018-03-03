@@ -17,7 +17,7 @@ def static(path):
 
 @bottle.post('/start')
 def start():
-    taunt = taunts[random.randint(0,3)]
+    taunt = taunts[random.randint(0,2)]
     data = bottle.request.json
     game_id = data.get('game_id')
     board_width = data.get('width')
