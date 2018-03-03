@@ -51,6 +51,8 @@ def move():
         y = a.get('y')
         board[x][y] = 'F'
     taunt = ""
+    headY = 0
+    headX = 0
     for snake in data.get('snakes').get('data'):
         if snake.get('name') == 'spicerack-snake':
             iteration = 1
