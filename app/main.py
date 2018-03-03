@@ -70,10 +70,11 @@ def move():
                 snakeX = point.get('x')
                 snakeY = point.get('y')
                 board[snakeX][snakeY] = 'X'
-    # TODO: Do things with data
-    #compute spaces down
-    moveOptions = {'spacesDown': 0, 'spacesUp': 0, 'spacesLeft': 0, 'spacesRight':0}
 
+    moveOptions = {'spacesDown': 0, 'spacesUp': 0, 'spacesLeft': 0, 'spacesRight':0}
+    global lastMove
+    if lastMove == 'up':
+        #dont go down
     for down in range(headY+1, board_height):
         if board[headX][down] == 0 or board[headX][down] == 'F':
             moveOptions['spacesDown'] = moveOptions['spacesDown']+1
@@ -95,7 +96,7 @@ def move():
         else:
             break
     most = max(moveOptions, key=lambda i: moveOptions[i])
-    global lastMove
+
     move = lastMove
     if most == 'spacesUp':
         move = 'up'
@@ -105,8 +106,8 @@ def move():
         move = 'left'
     elif most == 'spacesRight':
         movw = 'right'
-    taunt = taunts[random.randint(0,2)]
-
+    #taunt = taunts[random.randint(0,2)]
+    taunt = "Head: ", headX,", "headY
     lastMove = move
     return {
         'move': move,
