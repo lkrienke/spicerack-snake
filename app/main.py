@@ -60,12 +60,12 @@ def move():
                     headX = point.get('x')
                     headY = point.get('y')
                     board[headX][headY] = 'H'
-                    taunt = taunt +" ("+str(headX)+","+str(headY)+")"
+                    #taunt = taunt +" ("+str(headX)+","+str(headY)+")"
                 else:
                     ourSnakeX = point.get('x')
                     ourSnakeY = point.get('y')
                     board[ourSnakeX][ourSnakeY] = 'X'
-                    taunt = taunt +" ("+str(ourSnakeX)+","+str(ourSnakeY)+")"
+                    #taunt = taunt +" ("+str(ourSnakeX)+","+str(ourSnakeY)+")"
                 iteration = iteration+1
         else:
             for point in snake.get('body').get('data'):
@@ -108,6 +108,7 @@ def move():
     elif most == 'spacesRight':
         movw = 'right'
     #taunt = taunts[random.randint(0,2)]
+    taunt = "Up:" +str(moveOptions['spacesUp'])+" Down: "+str(moveOptions['spacesDown'])+" Right: "+ str(moveOptions['spacesRight'])+ " Left: "+str(moveOptions['spacesLeft'])
     lastMove = move
     return {
         'move': move,
