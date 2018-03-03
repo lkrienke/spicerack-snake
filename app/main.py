@@ -31,7 +31,7 @@ def start():
     # TODO: Do things with data
 
     return {
-        'color': '#5F4F6C',
+        'color': '#3B87AF',
         'head_url': head_url,
         'head_type': 'fang',
         'tail_type': 'curled',
