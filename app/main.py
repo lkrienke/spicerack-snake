@@ -72,34 +72,40 @@ def move():
                 board[snakeX][snakeY] = 'X'
     # TODO: Do things with data
     #compute spaces down
-    spacesDown = 0
-    spacesUp = 0
-    spacesLeft = 0
-    spacesRight = 0
+    moveOptions = {'spacesDown': 0, 'spacesUp': 0, 'spacesLeft': 0, 'spacesRight':0}
+
     for down in range(headY+1, board_height):
         if board[headX][down] == 0:
-            spacesDown = spacesDown+1
+            moveOptions['spacesDown'] = moveOptions['spacesDown']+1
         else:
             break
     for right in range(headX+1, board_width):
         if board[right][headY] == 0:
-            spacesRight = spacesRight+1
+            moveOptions['spacesRight'] = moveOptions['spacesRight']+1
         else:
             break
     for up in range(headY-1, 0, -1):
         if board[headX][up] == 0:
-            spacesUp = spacesUp+1
+            moveOptions['spacesUp'] = moveOptions['spacesUp']+1
         else:
             break
     for left in range(headX-1, 0, -1):
         if board[left][headY] == 0:
-            spacesLeft = spacesLeft+1
+            moveOptions['spacesLeft'] = moveOptions['spacesLeft']+1
         else:
             break
-    move = 'left'
+    most = max(moveOptions, key=lambda i: moveOptions[i])
+    move = 'up'
+    if most == 'spacesUp':
+        move = 'up'
+    elif most == 'spacesDown':
+        move = 'down'
+    elif most == 'spacesLeft':
+        move = 'left'
+    elif most == 'spacesRight':
+        movw = 'right'
     taunt = taunts[random.randint(0,2)]
 
-    print direction
     return {
         'move': move,
         'taunt': taunt
