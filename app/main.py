@@ -3,7 +3,7 @@ import os
 import random
 
 
-taunts = ['Cumin for you', 'Catch me if you cayenne', 'Youre outta thyme']
+taunts = ['Cumin for you', 'Catch me if you cayenne', 'Youre outta thyme', 'Dont be so clove minded', 'Do you really bay-leaf youre gonna win?', 'Dont be so salty', 'You basil believe we gon win', 'Curry up and lose already']
 lastMove = 'up'
 
 @bottle.route('/')
@@ -18,7 +18,7 @@ def static(path):
 
 @bottle.post('/start')
 def start():
-    taunt = taunts[random.randint(0,2)]
+    taunt = taunts[random.randint(0,7)]
     data = bottle.request.json
     game_id = data.get('game_id')
     board_width = data.get('width')
@@ -96,7 +96,6 @@ def move():
         else:
             break
     most = max(moveOptions, key=lambda i: moveOptions[i])
-
     if most == 'spacesUp':
         move = 'up'
     elif most == 'spacesDown':
@@ -105,14 +104,12 @@ def move():
         move = 'left'
     elif most == 'spacesRight':
         move = 'right'
-    #taunt = taunts[random.randint(0,2)]
-    taunt = "Up:" +str(moveOptions['spacesUp'])+" Down: "+str(moveOptions['spacesDown'])+" Right: "+ str(moveOptions['spacesRight'])+ " Left: "+str(moveOptions['spacesLeft'])
+    taunt = taunts[random.randint(0,7)]
+    #taunt = "Up:" +str(moveOptions['spacesUp'])+" Down: "+str(moveOptions['spacesDown'])+" Right: "+ str(moveOptions['spacesRight'])+ " Left: "+str(moveOptions['spacesLeft'])
     return {
         'move': move,
         'taunt': taunt
     }
-
-
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
 
