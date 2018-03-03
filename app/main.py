@@ -4,6 +4,8 @@ import random
 
 
 taunts = ['Cumin for you', 'Catch me if you cayenne', 'Youre outta thyme']
+board_width = 20
+board_height = 20
 
 @bottle.route('/')
 def static():
@@ -42,9 +44,25 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
+    board = [[0 for x in range(data.get('width'))] for y in range(data.get('height'))]
+    for a in data.get('food').get('data'):
+        x = a.get('x')
+        y = a.get('y')
+        board[x][y] = 'F'
 
+    for snake in data.get('snakes').get('data'):
+        if snake.get('name') == 'spicerack-snake':
+            for point in snake.get('body').get('data'):
+                snakeX = point.get('x')
+                snakeY = point.get('y')
+                board[snakeX][snakeY] = 'L'
+        else:
+            for point in snake.get('body').get('data'):
+                snakeX = point.get('x')
+                snakeY = point.get('y')
+                board[snakeX][snakeY] = 'X'
     # TODO: Do things with data
-
+    #print(board)
     taunt = taunts[random.randint(0,2)]
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
